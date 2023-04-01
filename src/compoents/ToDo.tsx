@@ -1,6 +1,17 @@
 import React from "react";
-import { useSetRecoilState } from "recoil";
 import { Categories, IToDo, toDoState } from "../state";
+import styled from "styled-components";
+
+const Category = styled.div`
+  background-color: #666146;
+  display: inline-block;
+  width: 50px;
+  margin: 5px;
+`;
+const Category1 = styled.div`
+  display: inline-block;
+  width: 60px;
+`;
 
 function ToDo({ text, category, id }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
@@ -20,9 +31,8 @@ function ToDo({ text, category, id }: IToDo) {
   };
   return (
     <li>
-      <span>
-        {category} {text}
-      </span>
+      <Category>{category}</Category>
+      <Category1>{text}</Category1>
       {category !== Categories.TO_DO && (
         <button name={Categories.TO_DO + ""} onClick={onClick}>
           To Do
