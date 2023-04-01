@@ -1,4 +1,5 @@
 import React from "react";
+import { useSetRecoilState } from "recoil";
 import { Categories, IToDo, toDoState } from "../state";
 import styled from "styled-components";
 
@@ -29,6 +30,16 @@ function ToDo({ text, category, id }: IToDo) {
       ];
     });
   };
+
+  const onDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const {
+      currentTarget: { name: id },
+    } = event;
+    setToDos((toDos) => {
+      return toDos.filter((todo) => todo.id !== Number(id));
+    });
+  };
+
   return (
     <li>
       <Category>{category}</Category>
@@ -48,6 +59,12 @@ function ToDo({ text, category, id }: IToDo) {
           Done
         </button>
       )}
+      {
+        <button name={String(id)} onClick={onDelete}>
+          {" "}
+          X
+        </button>
+      }
     </li>
   );
 }
